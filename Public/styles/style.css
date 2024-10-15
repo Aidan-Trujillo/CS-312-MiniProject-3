@@ -1,0 +1,61 @@
+body {
+    background-color: blanchedalmond;
+}
+
+header h1{
+    text-align: center;
+    margin-top: 40px;
+}
+
+
+form {
+    border: solid 5px;
+    width: 30em;
+    position: relative;
+    margin: auto;
+    padding-bottom: 40px;
+    padding-top: 15px;
+}
+
+form *{
+    padding: 5px;
+}
+
+form button {
+    float: right;
+    margin-right: 30px;
+}
+
+
+
+.blog-post {
+    border: 5px solid;
+    border-radius: 10px;
+    margin: 20px;
+    background-color: aqua;
+
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr;
+}
+
+.post-header {
+    padding: 2px;
+}
+
+.post-body {
+    display: flex;
+    flex-direction: row;
+}
+
+.post-footer {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+
+    align-items: right;
+    padding: 10px;
+}
+
+
+.placeholder {
+    height: 50px;
+}

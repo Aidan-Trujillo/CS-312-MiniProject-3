@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A blog page for CS 312">
+    <meta name="author" content="Aidan Trujillo">
+    <meta name="keywords" content="Blog, CS312, CS, NAU, Aidan, Trujillo">
+
+    <title>Edit Post</title>
+
+    <!-- Favicon placeholder -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    
+    <link rel="stylesheet" href="/styles/style.css">
+
+</head>
+<body>
+    <header>
+        <h1>Edit Post</h1>
+    </header>
+
+    <main>
+        <p style="font-size: 20px;">Below you can edit the blog post</p>
+
+        <!-- Blog Post Form Below -->
+        <div id="form-div">
+        <form action="/editPost" method="post">
+            <label for="name">Name: </label>
+            <input type="text" id="name" name="name" value="<%= post.name %>" required>
+            <br><br>
+
+            <label for="title">Title: </label>
+            <input type="text" id="title" name="title" value="<%= post.title %>" required>
+            <br><br>
+
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <!-- Below there is code to pre select which lable by using inline logic from EJS -->
+                <option value="" disabled>Select your category</option>
+                <option value="Tech" <%= post.category === 'Tech' ? 'selected' : '' %>>Tech</option>
+                <option value="Lifestyle" <%= post.category === 'Lifestyle' ? 'selected' : '' %>>Lifestyle</option>
+                <option value="Education" <%= post.category === 'Education' ? 'selected' : '' %>>Education</option>
+                <option value="None" <%= post.category === 'None' ? 'selected' : '' %>>None</option>
+            </select>
+            <br><br>
+
+            <label for="message">Message: </label>
+            <textarea id="message" name="message" rows="4" cols="50" required><%= post.message %>
+            </textarea>
+            <br><br>
+
+            <!-- Added labels and "options" to keep track of original time and id. It isn't needed but just incase it will be -->
+            <input style="display: none;" type="text" id="time" name="time" value="<%= post.time %>" required>
+            <input style="display: none;" type="text" id="id" name="id" value="<%= post.id %>" required>
+            
+
+            <button type="submit">Save</button>
+            
+        </form>
+        </div>

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Big A",
+    "title": "My mobile post",
+    "category": "Education",
+    "message": "You’re too cool to be doing this right now. I’m going to type so much just to try and overload the system. Ya know what I mean? Sad thing is I don’t know what to type. Just some mobile testing. Ya know. ",
+    "time": "Mon Sep 16 2024 07:59:54",
+    "id": 2
+  },
+  {
+    "name": "Bob",
+    "title": "Eating Right",
+    "category": "Lifestyle",
+    "message": "To eat right you are going to want to do a lot of things right. The first is buying groceries. This is a necessary step because without the right groceries, you will not eat right. You will just be eating and that's not good. I suggest you buy lots of groceries. And healthy ones. Step two. Don't eat out. The end. ",
+    "time": "Mon Sep 16 2024 08:02:23",
+    "id": 3
+  },
+  {
+    "name": "Aidan Trujillo",
+    "title": "Post big bro",
+    "category": "Lifestyle",
+    "message": "My blog post bitches\r\n            ",
+    "time": "Mon Sep 16 2024 22:23:11",
+    "id": "4"
+  }
+]
