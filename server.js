@@ -3,12 +3,14 @@
 // dependencies
 const { readPosts, addPost, getPostById, savePosts } = require('./utils');
 const {PostsPath} = require('./constants.js')
-
+const {getUser, insertUser} = require ('./database.js')
 
 // server initialization
 var express = require('express');
+var session = require('express-session');
 var fs = require('fs');
 var path = require('path');
+const { get } = require('https');
 
 // start app
 var app = express();
@@ -21,7 +23,13 @@ app.use(express.urlencoded({ extended: true }));
 // set static files
 app.use(express.static(path.join(__dirname, 'Public')));
 
-
+// attempting to use session cookies so that I can save users sessions
+app.use(session({
+    secret: 'jsojfj3f93-jmpsjf-j2pnoidjfkajsof3jwejg;lksnojd', 
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } 
+  }));
 
 // index page (where blog shows up)
 app.get('/', async (req,res) => {
@@ -29,6 +37,7 @@ app.get('/', async (req,res) => {
         // get all posts
         const {posts, lastId} = await readPosts(PostsPath);
 
+        console.log(posts)
         console.log(posts.length)
         res.render('index', { 
             title: 'Blog Page', 
@@ -147,6 +156,43 @@ app.get('/deletePost', async (req,res) => {
 })
 
 
+// ++++++++++++++++++++ login and sign up pages ++++++++++++++++ //
+app.get('/login', async (req,res) => {
+    res.render('./login', {error: ""});
+});
+
+app.post('/login', async (req,res) => {
+    const userData = await getUser(req.body.username, req.body.password);
+
+
+    // check if userData exists and if user was existing
+    if (userData != null) {
+        console.log("Rendering the root")
+        req.session.username = userData.user_name; 
+        req.session.name = userData.name
+        res.redirect('/');
+    } else if (userData === null){
+        res.render('./login', {
+            error: "Incorrect username or password"
+        });
+    } else {
+        res.render('./signup')
+    } 
+
+});
+
+app.get('/signup', async (req,res) => {
+    res.render('./signup', {error: ""});
+});
+
+app.post('/signup', async (req,res) => {
+
+    // add user
+    insertUser(req.body.username, req.body.password, req.body.name);
+    
+    res.render('./login')
+
+});
 
 app.listen(8080);
 console.log('Server is listening on port 8080');

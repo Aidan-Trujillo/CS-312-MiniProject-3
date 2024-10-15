@@ -91,15 +91,15 @@
                             Delete</button>
 
                             <h1><%= post.title %></h1>
-                            <h4>Author: <%= post.name %></h4>
+                            <h4>Author: <%= post.creator_name %></h4>
                         </div> 
                         <!-- Blog Post information -->
                         <div class="post-body">
-                            <p><%= post.message %></p>
+                            <p><%= post.body %></p>
                         </div>
                         <div class="post-footer">
                             <h6><%= post.category %></h6>
-                            <h6><%= post.time %></h6>
+                            <h6><%= post.date_created %></h6>
                         </div>
                     </div>
                 <% }) %>

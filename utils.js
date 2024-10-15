@@ -1,35 +1,29 @@
 const fs = require('fs');
 const {PostsPath} = require('./constants.js');
 const { json } = require('express');
+const { getPosts } = require('./database.js');
 
 // function that outputs an array of blog posts
 const readPosts = async (filePath) => {
     try{
-        const data = await fs.promises.readFile(filePath, 'utf8');
-        var jsonData = JSON.parse(data);
+        const result = await getPosts();
+        const posts = result.rows;
         
-        // get into array format if not
-        if (data[0] !== '['){
-            jsonData = [jsonData]
-        }
-
         // get the next index so we know how many posts there are total
         var lastId = 0
-        if (jsonData.length > 0){
-            lastId = jsonData[jsonData.length - 1].id;
+        if (posts.length > 0){
+            lastId = posts[posts.length - 1].blog_id;
         }
         
-
-        const posts = jsonData; // format it in the way that will be readable in server
-        console.log(posts)
         return {posts, lastId};
 
     } catch (err) {
-        console.error('Error reading file: ', err)
+        console.error('Error quering data: ', err)
         // send black blank file
         return []
     }
 };
+
 
 // function that simplly adds a newly created post
 const addPost = async (filePath, post) => {
